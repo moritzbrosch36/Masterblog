@@ -35,13 +35,16 @@ if not os.path.exists(FILE_PATH):
 
 
 def load_posts():
-    """Load all blog posts from the JSON file, ensuring 'likes' exists."""
-    with open(FILE_PATH, "r", encoding="utf-8") as handle:
-        posts = json.load(handle)
-        for post in posts:
-            if "likes" not in post:
-                post["likes"] = 0
-        return posts
+    """Load all blog posts safely from the JSON file, ensuring 'likes' exists."""
+    try:
+        with open(FILE_PATH, "r", encoding="utf-8") as handle:
+            posts = json.load(handle)
+    except (FileNotFoundError, json.JSONDecodeError):
+        posts = []
+
+    for post in posts:
+        post.setdefault("likes", 0)
+    return posts
 
 
 def save_posts(posts):
