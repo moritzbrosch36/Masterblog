@@ -16,8 +16,15 @@
                 <p><em>Written by {{ post.author }}</em></p>
                 <p>{{ post.content }}</p>
 
+                <!-- Update Button -->
+                <form actions="{{ url_for('update', post_id=post.id) }}"
+                      method="get" style="display:inline;">
+                    <button type="submit">Update<</button>
+                </form>
+
                 <!-- Delete Button -->
-                <form action="{{ url_for('delete', post_id=post.id) }}" method="get" style="display:inline;">
+                <form action="{{ url_for('delete', post_id=post.id) }}"
+                      method="get" style="display:inline;">
                     <button type="submit">Delete</button>
                 </form>
             </div>
