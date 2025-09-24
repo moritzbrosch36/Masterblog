@@ -51,9 +51,9 @@ def delete(post_id):
 
 @app.route("/update/<int:post_id>", methods=["GET", "POST"])
 def update(post_id):
-    posts =load_posts()
-
+    posts = load_posts()
     post = next((p for p in posts if p["id"] == post_id), None)
+
     if post is None:
         return "Post not found", 404
 
