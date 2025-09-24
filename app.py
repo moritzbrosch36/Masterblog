@@ -53,10 +53,8 @@ def delete(post_id):
 def update(post_id):
     posts =load_posts()
 
-    for post in posts:
-        if post["id"] == post_id:
-            break
-    else:
+    post = next((p for p in posts if p["id"] == post_id), None)
+    if post is None:
         return "Post not found", 404
 
     if request.method == "POST":
@@ -66,6 +64,7 @@ def update(post_id):
 
         save_posts(posts)
         return redirect(url_for("index"))
+
     return render_template("update.html", post=post)
 
 
