@@ -14,7 +14,13 @@
   {
     "id": 3,
     "author": "Moki",
-    "title": "New created blog",
-    "content": "This is my first blog i ever create. \r\nI hope every function runs."
+    "title": "Delete",
+    "content": "Delete Route works!!"
+  },
+  {
+    "id": 4,
+    "author": "Moki",
+    "title": "Smile test",
+    "content": "😁 smiling Face"
   }
 ]
