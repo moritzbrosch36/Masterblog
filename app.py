@@ -13,14 +13,14 @@ def save_posts(posts):
     with open(FILE_PATH, "w", encoding="utf-8") as handle:
         json.dump(posts, handle, ensure_ascii=False, indent=2)
 
-@app.route('/')
+@app.route("/")
 def index():
     blog_posts = load_posts()
-    return render_template('index.html', posts=blog_posts)
+    return render_template("index.html", posts=blog_posts)
 
-@app.route('/add', methods=['GET', 'POST'])
+@app.route("/add", methods=["GET", "POST"])
 def add():
-    if request.method == 'POST':
+    if request.method == "POST":
         posts = load_posts()
 
         new_post = {
@@ -33,12 +33,12 @@ def add():
         posts.append(new_post)
         save_posts(posts)
 
-        return redirect(url_for('index'))
+        return redirect(url_for("index"))
 
-    return render_template('add.html')
+    return render_template("add.html")
 
 
-@app.route('/delete/<int:post_id>')
+@app.route("/delete/<int:post_id>")
 def delete(post_id):
     posts = load_posts()
     for post in posts:
@@ -46,8 +46,28 @@ def delete(post_id):
             posts.remove(post)
             break
     save_posts(posts)
-    return redirect(url_for('index'))
+    return redirect(url_for("index"))
 
 
-if __name__ == '__main__':
+@app.route("/update/<int:post_id>", methods=["GET", "POST"])
+def update(post_id):
+    posts =load_posts()
+
+    for post in posts:
+        if post["id"] == post_id:
+            break
+    else:
+        return "Post not found", 404
+
+    if request.method == "POST":
+        post["author"] = request.form["author"]
+        post["title"] = request.form["title"]
+        post["content"] = request.form["content"]
+
+        save_posts(posts)
+        return redirect(url_for("index"))
+    return render_template("update.html", post=post)
+
+
+if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
