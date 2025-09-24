@@ -9,22 +9,27 @@ def load_posts():
     with open(FILE_PATH, "r", encoding="utf-8") as handle:
         return json.load(handle)
 
+
 def save_posts(posts):
     with open(FILE_PATH, "w", encoding="utf-8") as handle:
         json.dump(posts, handle, ensure_ascii=False, indent=2)
+
 
 @app.route("/")
 def index():
     blog_posts = load_posts()
     return render_template("index.html", posts=blog_posts)
 
+
 @app.route("/add", methods=["GET", "POST"])
 def add():
     if request.method == "POST":
         posts = load_posts()
 
+        new_id = max([p["id"] for p in posts], default=0) + 1
+
         new_post = {
-            "id": len(posts) + 1,
+            "id": new_id,
             "author": request.form["author"],
             "title": request.form["title"],
             "content": request.form["content"]
