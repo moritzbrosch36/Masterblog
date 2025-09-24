@@ -1,13 +1,24 @@
 from flask import Flask, render_template, request, redirect, url_for
 import json
+import os
 
 FILE_PATH = "blog_posts.json"
 
 app = Flask(__name__)
 
+if not os.path.exists(FILE_PATH):
+    with open(FILE_PATH, "w", encoding="utf-8") as f:
+        json.dump([], f, ensure_ascii=False, indent=2)
+
+
 def load_posts():
     with open(FILE_PATH, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+        posts = json.load(handle)
+        # Falls Likes fehlen, ergänzen
+        for post in posts:
+            if "likes" not in post:
+                post["likes"] = 0
+        return posts
 
 
 def save_posts(posts):
@@ -71,6 +82,16 @@ def update(post_id):
         return redirect(url_for("index"))
 
     return render_template("update.html", post=post)
+
+
+@app.route("/like/<int:post_id>", methods=["POST"])
+def like(post_id):
+    posts = load_posts()
+    post = next((p for p in posts if p["id"] == post_id), None)
+    if post:
+        post["likes"] += 1
+        save_posts(posts)
+    return redirect(url_for("index"))
 
 
 if __name__ == "__main__":

@@ -3,18 +3,41 @@
     "id": 1,
     "author": "John Doe",
     "title": "First Post",
-    "content": "This is my first post."
+    "content": "This is my first post.",
+    "likes": 0
   },
   {
     "id": 2,
     "author": "Jane Doe",
     "title": "Second Post",
-    "content": "This is my second post."
+    "content": "This is my second post.",
+    "likes": 0
   },
   {
     "id": 3,
     "author": "Moki",
     "title": "Smile",
-    "content": "😁"
+    "content": "😁",
+    "likes": 0
+  },
+  {
+    "id": 4,
+    "author": "Moki",
+    "title": "Congratulation",
+    "content": "You survived the Masterblog Project.\r\nNow take a coffee an relax.\r\n👏☕️",
+    "likes": 9
+  },
+  {
+    "id": 5,
+    "author": "Moki",
+    "title": "Update Function",
+    "content": "To create the update function was sooooo difficult. I almost thought i would cry.\r\n\r\nI hope the next Codio will be simpler.\r\nHope dies last. 😓",
+    "likes": 1
+  },
+  {
+    "id": 6,
+    "author": "Moki",
+    "title": "👍",
+    "content": "I like the like button. 👍"
   }
 ]
