@@ -15,6 +15,7 @@
                 {% for post in posts %}
                     <li>
                         <h2>{{ post.title }}</h2>
+                        <p><strong>Author:</strong> {{ post.author }}</p>
                         <p>{{ post.content }}</p>
                     </li>
                 {% endfor %}
@@ -22,6 +23,7 @@
         {% else %}
             <p>No Blogposts found.</p>
         {% endif %}
+
         <h2>Post Title</h2>
         <p><em>Written by ...</em></p>
         <p>Post content</p>

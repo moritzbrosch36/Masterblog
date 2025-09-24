@@ -10,7 +10,7 @@ app = Flask(__name__)
 def index():
     with open(FILE_PATH, "r", encoding="utf-8") as handle:
         blog_posts = json.load(handle)
-    return render_template("index.html", posts=blog_posts)
+    return render_template('index.html', posts=blog_posts)
 
 
 if __name__ == '__main__':
